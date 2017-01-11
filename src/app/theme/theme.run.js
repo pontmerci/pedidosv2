@@ -9,10 +9,10 @@
     .run(themeRun);
 
   /** @ngInject */
-  function themeRun($timeout, $rootScope, layoutPaths, preloader, $q, baSidebarService, themeLayoutSettings) {
+  function themeRun($window, $timeout, $rootScope, layoutPaths, preloader, $q, baSidebarService, themeLayoutSettings) {
     var whatToWait = [
       preloader.loadAmCharts(),
-      $timeout(3000)
+      $timeout(500)
     ];
 
     var theme = themeLayoutSettings;
@@ -33,9 +33,16 @@
       if (!$rootScope.$pageFinishedLoading) {
         $rootScope.$pageFinishedLoading = true;
       }
-    }, 7000);
+    }, 1000);
 
     $rootScope.$baSidebarService = baSidebarService;
+
+    var token= window.sessionStorage.getItem("token");
+    if (!token){
+        $window.location.href = "/auth.html";
+    }
+
+
   }
 
 })();
