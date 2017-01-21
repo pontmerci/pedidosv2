@@ -9,8 +9,27 @@
       .controller('MsgCenterCtrl', MsgCenterCtrl);
 
   /** @ngInject */
-  function MsgCenterCtrl($scope, $sce) {
-    $scope.users = {
+  function MsgCenterCtrl($scope) {
+
+
+      $scope.pedido = {proveedor:'PROVEEDOR1',
+          items:[
+              {renglon:1,descripcion:'ITEM1',cantidad:2,precio:12.4},
+              {renglon:2,descripcion:'ITEM1',cantidad:2,precio:12.4},
+              {renglon:3,descripcion:'ITEM1',cantidad:2,precio:12.4},
+              {renglon:4,descripcion:'ITEM1',cantidad:2,precio:12.4}
+              ],
+          subtotal: 100.00,
+          iva1: 21.00,
+          iva2: 1.50,
+          imp: 0.00,
+          total: 122.50
+      };
+      $scope.itemcount = $scope.pedido.items.length; // ;
+
+
+
+      $scope.users = {
       0: {
         name: 'Vlad',
       },
@@ -63,50 +82,50 @@
       }
     ];
 
-    $scope.messages = [
-      {
-        userId: 3,
-        text: 'After you get up and running, you can place Font Awesome icons just about...',
-        time: '1 min ago'
-      },
-      {
-        userId: 0,
-        text: 'You asked, Font Awesome delivers with 40 shiny new icons in version 4.2.',
-        time: '2 hrs ago'
-      },
-      {
-        userId: 1,
-        text: 'Want to request new icons? Here\'s how. Need vectors or want to use on the...',
-        time: '10 hrs ago'
-      },
-      {
-        userId: 2,
-        text: 'Explore your passions and discover new ones by getting involved. Stretch your...',
-        time: '1 day ago'
-      },
-      {
-        userId: 3,
-        text: 'Get to know who we are - from the inside out. From our history and culture, to the...',
-        time: '1 day ago'
-      },
-      {
-        userId: 1,
-        text: 'Need some support to reach your goals? Apply for scholarships across a variety of...',
-        time: '2 days ago'
-      },
-      {
-        userId: 0,
-        text: 'Wrap the dropdown\'s trigger and the dropdown menu within .dropdown, or...',
-        time: '1 week ago'
-      }
-    ];
+    // $scope.messages = [
+    //   {
+    //     userId: 3,
+    //     text: 'After you get up and running, you can place Font Awesome icons just about...',
+    //     time: '1 min ago'
+    //   },
+    //   {
+    //     userId: 0,
+    //     text: 'You asked, Font Awesome delivers with 40 shiny new icons in version 4.2.',
+    //     time: '2 hrs ago'
+    //   },
+    //   {
+    //     userId: 1,
+    //     text: 'Want to request new icons? Here\'s how. Need vectors or want to use on the...',
+    //     time: '10 hrs ago'
+    //   },
+    //   {
+    //     userId: 2,
+    //     text: 'Explore your passions and discover new ones by getting involved. Stretch your...',
+    //     time: '1 day ago'
+    //   },
+    //   {
+    //     userId: 3,
+    //     text: 'Get to know who we are - from the inside out. From our history and culture, to the...',
+    //     time: '1 day ago'
+    //   },
+    //   {
+    //     userId: 1,
+    //     text: 'Need some support to reach your goals? Apply for scholarships across a variety of...',
+    //     time: '2 days ago'
+    //   },
+    //   {
+    //     userId: 0,
+    //     text: 'Wrap the dropdown\'s trigger and the dropdown menu within .dropdown, or...',
+    //     time: '1 week ago'
+    //   }
+    // ];
 
-    $scope.getMessage = function(msg) {
+    /*$scope.getMessage = function(msg) {
       var text = msg.template;
       if (msg.userId || msg.userId === 0) {
         text = text.replace('&name', '<strong>' + $scope.users[msg.userId].name + '</strong>');
       }
       return $sce.trustAsHtml(text);
-    };
+    };*/
   }
 })();
