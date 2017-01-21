@@ -9,7 +9,7 @@
     .run(themeRun);
 
   /** @ngInject */
-  function themeRun($window, $timeout, $rootScope, layoutPaths, preloader, $q, baSidebarService, themeLayoutSettings) {
+  function themeRun($log, $window, $timeout, $rootScope, layoutPaths, preloader, $q, baSidebarService, themeLayoutSettings, $http) {
     var whatToWait = [
       preloader.loadAmCharts(),
       $timeout(500)
@@ -40,6 +40,13 @@
     var token= window.sessionStorage.getItem("token");
     if (!token){
         $window.location.href = "/auth.html";
+    }else{
+        $http.get('http://provinciasunidasltd.com.ar/apiv1/public/api.php/validar/'+token).then(function (data) {
+            $log.log(data.data);
+            if(!data.data){
+               $window.location.href = "/auth.html";
+            }
+        })
     }
 
 

@@ -65,20 +65,7 @@
   </div>
 </main>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
-<script>
-    angular.module('loginApp', [])
-        .controller('LoginCtrl', function($log, $scope, $window) {
-
-            $log.log('hola');
-            $scope.validar = {"usuario":"","password":""};
-            $scope.submit = function () {
-                window.sessionStorage.setItem("token","123");
-                $window.location.href = "/";
-
-            }
-        });
-
-</script>
+<script src="init.js"></script>
 
 </body>
 </html>

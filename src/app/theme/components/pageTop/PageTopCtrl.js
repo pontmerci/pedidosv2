@@ -12,6 +12,7 @@
   function PageTopCtrl($log, $scope, $window) {
 
     $scope.salir = function () {
+        $log.log('Chau!');
         window.sessionStorage.clear();
         $window.location.href = "/auth.html";
     }
