@@ -1,44 +1,62 @@
-<div class="horizontal-scroll">
+<div class="table-responsive">
   <div class="form-group select-page-size-wrap ">
-    <label>Rows on page
-      <select class="form-control selectpicker show-tick" title="Rows on page" selectpicker
-              ng-model="smartTablePageSize" ng-options="i for i in [5,10,15,20,25]">
+    <label>Filas
+      <select class="form-control selectpicker show-tick" title="Filas" selectpicker
+              ng-model="smartTablePageSize" ng-options="i for i in [5,10,15,20,25,1000]">
       </select>
     </label>
 
   </div>
-  <table class="table" st-table="smartTableData">
+    <progress-bar-round ng-if="!cargado"></progress-bar-round>
+  <table class="table table-striped" st-table="smartTableData" ng-if="cargado">
     <thead>
     <tr class="sortable ">
-      <th class="table-id" st-sort="id" st-sort-default="true">#</th>
-      <th st-sort="firstName">First Name</th>
-      <th st-sort="lastName">Last Name</th>
-      <th st-sort="username">Username</th>
-      <th st-sort="email">Email</th>
-      <th st-sort="age">Age</th>
+      <th class="table-id" st-sort="codarticulo" st-sort-default="true">Cod.</th>
+      <th st-sort="descripcion">Descripcion</th>
+      <th st-sort="unidades_caja">Pack</th>
+      <th st-sort="precio_1">Precio Unitario</th>
+      <th st-sort="precio_4">Imp.Int/U</th>
+      <th st-sort="cantidad">Cantidad (Pack)</th>
+      <!--<th st-sort="fecha_modificacion">Fec.Act.</th>-->
+      <th ></th>
     </tr>
     <tr>
-      <th></th>
-      <th><input st-search="firstName" placeholder="Search First Name" class="input-sm form-control search-input"
-                 type="search"/></th>
-      <th><input st-search="lastName" placeholder="Search Last Name" class="input-sm form-control search-input"
+      <th colspan="2">
+          <input st-search="codarticulo" placeholder="Filtro por Codigo..." class="input-sm form-control search-input"
+                 type="search"/>
+      </th>
+      <th colspan="4">
+          <input st-search="descripcion" placeholder="Filtro por Descripcion..." class="input-sm form-control search-input"
+                 type="search"/>
+      </th>
+      <!--<th><input st-search="lastName" placeholder="Search Last Name" class="input-sm form-control search-input"
                  type="search"/></th>
       <th><input st-search="username" placeholder="Search Username" class="input-sm form-control search-input"
                  type="search"/></th>
       <th><input st-search="email" placeholder="Search Email" class="input-sm form-control search-input" type="search"/>
       </th>
       <th><input st-search="age" placeholder="Search Age" class="input-sm form-control search-input" type="search"/>
-      </th>
+      </th>-->
+      <th></th>
     </tr>
     </thead>
     <tbody>
     <tr ng-repeat="item in smartTableData">
-      <td class="table-id">{{item.id}}</td>
-      <td>{{item.firstName}}</td>
-      <td>{{item.lastName}}</td>
-      <td>{{item.username}}</td>
-      <td><a class="email-link" ng-href="mailto:{{item.email}}">{{item.email}}</a></td>
-      <td>{{item.age}}</td>
+      <td class="table-id">{{item.codarticulo}}</td>
+      <td class="align-left">{{item.descripcion}}</td>
+      <td class="align-center">{{item.unidades_caja}}</td>
+      <td class="align-right">{{item.precio_1 | currency}}</td>
+      <td class="align-right">{{item.precio_4 | currency}}</td>
+      <td style="width: 30px;">
+          <input style="text-align: right" type="number" class="form-control" placeholder="0">
+      </td>
+      <!--<td>{{item.fecha_modificacion | date:'dd/MM/yyyy'}}</td>-->
+      <td>
+        <div class="buttons">
+            <button class="btn btn-success "><span class="fa fa-shopping-cart"></span></button>
+            <button class="btn btn-info "><span class="fa fa-info"></span></button>
+        </div>
+      </td>
     </tr>
     </tbody>
     <tfoot>

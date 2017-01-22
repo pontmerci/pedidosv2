@@ -1,0 +1,122 @@
+<div class="widgets">
+    <div class="row">
+        <div class="col-md-12">
+            <h6>Prov. Seleccionado: <strong>PROVEEDOR1</strong></h6>
+        </div>
+    </div>
+
+    <uib-accordion>
+        <uib-accordion-group panel-class="bootstrap-panel accordion-panel panel-primary">
+            <uib-accordion-heading>
+                Buscar Artículos <i class="fa pull-right fa-plus-circle"></i>
+            </uib-accordion-heading>
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="row form-inline">
+                        <div class="form-group col-md-3">
+
+                        </div>
+                        <div class="form-group col-md-3">
+                            <input type="email" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <input type="email" class="form-control"  placeholder="Email">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send invitation</button>
+                    </form>
+
+                </div>
+            </div>
+
+        </uib-accordion-group>
+    </uib-accordion>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div ba-panel  ba-panel-class="with-scroll" ba-panel-title="Articulos encontrados">
+          <!--ba-panel-title="Articulos encontrados..."-->
+
+                <div class="table-responsive">
+                    <div class="form-group select-page-size-wrap ">
+                        <label>Filas
+                            <select class="form-control selectpicker show-tick" title="Filas" selectpicker
+                              ng-model="smartTablePageSize" ng-options="i for i in [5,10,15,20,25,1000]">
+                            </select>
+                        </label>
+                    </div>
+                    <progress-bar-round ng-if="!cargado"></progress-bar-round>
+
+                    <table class="table table-striped" st-table="smartTableData" ng-if="cargado">
+
+                        <thead>
+                          <tr class="sortable ">
+                              <th class="table-id" st-sort="codarticulo" st-sort-default="true">Cod.</th>
+                              <th st-sort="descripcion">Descripcion</th>
+                              <th st-sort="unidades_caja">Pack</th>
+                              <th class="align-right" st-sort="precio_1">Precio Unitario</th>
+                              <th class="align-right" st-sort="precio_4">Imp.Int/U</th>
+                              <!--<th st-sort="fecha_modificacion">Fec.Act.</th>-->
+                              <th ></th>
+                          </tr>
+                          <tr>
+                              <th></th>
+                              <th colspan="3">
+                                  <input st-search="descripcion" placeholder="Filtro por Descripcion..." class="input-sm form-control search-input"
+                                         type="search"/>
+                              </th>
+                              <th colspan="1">
+                                  <input st-search="codarticulo" placeholder="Filtro por Codigo..." class="input-sm form-control search-input"
+                                         type="search"/>
+                              </th>
+                              <th></th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <tr ng-repeat="item in smartTableData">
+                              <td class="table-id">{{item.codarticulo}}</td>
+                              <td class="align-left">{{item.descripcion}}</td>
+                              <td class="align-center">{{item.unidades_caja}}</td>
+                              <td class="align-right">{{item.precio_1 | currency}}</td>
+                              <td class="align-right">{{item.precio_4 | currency}}</td>
+                              <!--<td class="align-center">{{item.fecha_modificacion}}</td>-->
+                              <td>
+                                  <div class="buttons">
+                                      <button ng-click="abrir(item)" class="btn btn-success btn-xs"><span class="fa fa-shopping-cart"></span></button>
+                                  </div>
+                              </td>
+                          </tr>
+                        </tbody>
+
+                        <tfoot>
+                          <tr>
+                              <td colspan="6" class="text-center">
+                                  <div st-pagination="" st-items-by-page="smartTablePageSize" st-displayed-pages="5"></div>
+                              </td>
+                          </tr>
+
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<script type="text/ng-template" id="agregarArticulo.html">
+    <div class="modal-content">
+        <div class="modal-header bg-success">
+            <i class="ion-checkmark modal-icon"></i><span> Agregar Articulo al Pedido</span>
+        </div>
+        <div class="modal-body text-center">
+            {{ articulo.descripcion }}
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" ng-click="$dismiss()">Agregar</button>
+            <button type="button" class="btn btn-danger" ng-click="$dismiss()">Cancelar</button>
+        </div>
+    </div>
+</script>-->
+
+
+

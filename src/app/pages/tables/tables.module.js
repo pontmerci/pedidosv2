@@ -31,7 +31,7 @@
         }).state('tables.smart', {
           url: '/smart',
           templateUrl: 'app/pages/tables/smart/tables.html',
-          title: 'Smart Tables',
+          title: 'Articulos',
           sidebarMeta: {
             order: 100,
           },

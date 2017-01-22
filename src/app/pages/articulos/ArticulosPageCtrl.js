@@ -5,20 +5,18 @@
 (function () {
   'use strict';
 
-  angular.module('BlurAdmin.pages.tables')
-      .controller('TablesPageCtrl', TablesPageCtrl);
+  angular.module('BlurAdmin.pages.articulos')
+      .controller('ArticulosPageCtrl', ArticulosPageCtrl);
 
   /** @ngInject */
-  function TablesPageCtrl($log, $scope, ArticulosSrv, $timeout, baProgressModal) {
+  function ArticulosPageCtrl($log, $scope, ArticulosSrv, $timeout, baProgressModal, $uibModal) {
 
       $scope.rubros = [];
       $scope.marcas = [];
       $scope.proveedores = [];
       $scope.smartTableData = [];
+
       $scope.cargado=false;
-
-
-
       baProgressModal.setProgress(0);
       (function changeValue() {
           if (baProgressModal.getProgress() >= 100) {
@@ -39,6 +37,20 @@
       });
 
       $scope.smartTablePageSize = 10;
+
+      $scope.abrir = function (item) {
+          $scope.artSel = item
+          $uibModal.open({
+              animation: true,
+              templateUrl: 'app/pages/articulos/agregarArticulo.html',
+              size: 'md',
+              scope: $scope
+          });
+      };
+      
+      $scope.agregar = function () {
+          $log.log($scope.artSel);
+      }
 
 
 

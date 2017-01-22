@@ -1,0 +1,46 @@
+<div class="modal-content">
+    <div class="modal-header bg-success">
+        <i class="fa fa-shopping-cart modal-icon"></i><span> AGREGAR ARTICULO </span>
+    </div>
+    <div class="modal-body ">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-block text-center">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3><small>{{ artSel.codarticulo }}</small> {{ artSel.descripcion }}</h3>
+                            <p ng-if="artSel.observaciones">{{ artSel.observaciones }}</p>
+                            <p>Proveedor: <strong>{{ artSel.proveedor }}</strong>  | Rubro: <strong>{{ artSel.rubro }}</strong> | Marca: <strong>{{ artSel.marca }}</strong> </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5">
+                <img src="assets/img/no_image.png" class="img-responsive" alt="Sin imagen"  />
+            </div>
+            <div class="col-md-7">
+                <p>Uni/Pack: <strong>{{ artSel.unidades_caja }}</strong></p>
+                <p>Precio Unidad: <strong>{{ artSel.precio_1 | currency }}</strong></p>
+                <p>Precio Pack: <strong>{{ artSel.precio_2 | currency }}</strong></p>
+                <div class="input-group" style="width: 200px;">
+                    <span class="input-group-addon input-group-addon-primary addon-left" style="color:#FFFFFF" >Cant. Packs</span>
+                    <input ng-model="artSel.cantidad" type="number" class="form-control with-primary-addon" placeholder="0" >
+                </div>
+                <p>Total: <strong>{{ (artSel.precio_2 * artSel.cantidad) | currency }}</strong></p>
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" ng-click="agregar();$dismiss();">Agregar</button>
+        <button type="button" class="btn btn-danger" ng-click="$dismiss()">Cancelar</button>
+    </div>
+</div>
+
+
