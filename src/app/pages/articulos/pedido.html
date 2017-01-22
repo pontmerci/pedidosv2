@@ -1,0 +1,26 @@
+<div class="widgets">
+    <progress-bar-round ng-if="!cargado"></progress-bar-round>
+    <div class="row">
+        <div class="col-md-12">
+            <div ba-panel ba-panel-class="with-scroll">
+                <ba-wizard>
+                    <ba-wizard-step title="Seleccionar Proveedor" form="vm.proveedorForm">
+                        <div include-with-scope="app/pages/articulos/seleccionarProveedor.html"></div>
+                    </ba-wizard-step>
+                    <ba-wizard-step title="Agregar Articulos" >
+                        <div include-with-scope="app/pages/articulos/buscarArticulos.html"></div>
+                    </ba-wizard-step>
+                    <ba-wizard-step title="Editar Pedido"  form="vm.pedidoForm">
+                        <div include-with-scope="app/pages/articulos/editarPedido.html"></div>
+                    </ba-wizard-step>
+                    <ba-wizard-step title="Finalizar">
+                        <form class="form-horizontal" name="vm.finishForm" novalidate>
+                            Congratulations! You have successfully filled the form!
+                        </form>
+                    </ba-wizard-step>
+                </ba-wizard>
+            </div>
+        </div>
+    </div>
+
+</div>

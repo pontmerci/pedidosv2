@@ -9,11 +9,27 @@
       .controller('ArticulosPageCtrl', ArticulosPageCtrl);
 
   /** @ngInject */
-  function ArticulosPageCtrl($log, $scope, ArticulosSrv, $timeout, baProgressModal, $uibModal) {
+  function ArticulosPageCtrl($log, $scope, ArticulosSrv, ProveedoresSrv, FamiliasSrv, MarcasSrv, $timeout, baProgressModal, $uibModal) {
 
       $scope.rubros = [];
+      FamiliasSrv.getFamilias().then(function (data) {
+          $log.log(data);
+          $scope.rubros = data;
+      })
+
       $scope.marcas = [];
+      MarcasSrv.getMarcas().then(function (data) {
+          $log.log(data);
+          $scope.marcas = data;
+      })
+
       $scope.proveedores = [];
+      ProveedoresSrv.getProveedores().then(function (data) {
+          $scope.proveedores = data;
+      })
+      $scope.filtro = {proveedor:'',rubro:'',marca:''};
+
+
       $scope.smartTableData = [];
 
       $scope.cargado=false;

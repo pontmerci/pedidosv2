@@ -18,18 +18,50 @@
         </div>
 
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-xs-5">
                 <img src="assets/img/no_image.png" class="img-responsive" alt="Sin imagen"  />
             </div>
-            <div class="col-md-7">
-                <p>Uni/Pack: <strong>{{ artSel.unidades_caja }}</strong></p>
-                <p>Precio Unidad: <strong>{{ artSel.precio_1 | currency }}</strong></p>
-                <p>Precio Pack: <strong>{{ artSel.precio_2 | currency }}</strong></p>
-                <div class="input-group" style="width: 200px;">
-                    <span class="input-group-addon input-group-addon-primary addon-left" style="color:#FFFFFF" >Cant. Packs</span>
-                    <input ng-model="artSel.cantidad" type="number" class="form-control with-primary-addon" placeholder="0" >
+            <div class="col-xs-7 section-block">
+                <div class="row ">
+                    <div class="col-xs-6">
+                        <p>Uni/Pack:</p>
+                    </div>
+                    <div class="col-xs-6">
+                        <p><strong>{{ artSel.unidades_caja }}</strong></p>
+                    </div>
                 </div>
-                <p>Total: <strong>{{ (artSel.precio_2 * artSel.cantidad) | currency }}</strong></p>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <p>Precio Unidad:</p>
+                    </div>
+                    <div class="col-xs-6">
+                        <p><strong>{{ artSel.precio_1 | currency }}</strong></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <p>Precio Pack:</p>
+                    </div>
+                    <div class="col-xs-6">
+                        <p><strong>{{ artSel.precio_2 | currency }}</strong></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="input-group" style="width: 250px;">
+                            <span class="input-group-addon input-group-addon-primary addon-left" style="color:#FFFFFF" >Cant. Packs</span>
+                            <input style="text-align: right" ng-model="artSel.cantidad" type="number" class="form-control with-primary-addon" placeholder="0" >
+                        </div>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col-xs-6">
+                        <p><strong>Total: </strong></p>
+                    </div>
+                    <div class="col-xs-6">
+                        <p><strong>{{ (artSel.precio_2 * artSel.cantidad) | currency }}</strong></p>
+                    </div>
+                </div>
             </div>
         </div>
 

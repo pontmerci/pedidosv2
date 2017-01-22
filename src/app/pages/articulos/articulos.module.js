@@ -11,32 +11,28 @@
   /** @ngInject */
   function routeConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
-        .state('pedidoactual', {
-          url: '/pedidoactual',
+        .state('pedidos', {
+          url: '/pedidos',
           template : '<ui-view  autoscroll="true" autoscroll-body-top></ui-view>',
           abstract: true,
-          title: 'Pedido Actual',
-          controller: 'ArticulosPageCtrl',
+          title: 'Pedidos',
           sidebarMeta: {
             icon: 'ion-grid',
             order: 100,
           },
-        }).state('pedidoactual.articulos', {
-          url: '/articulos',
-          templateUrl: 'app/pages/articulos/articulos.html',
-          title: 'Articulos',
-          sidebarMeta: {
-            order: 102,
-          },
-        }).state('pedidoactual.selprov', {
-          url: '/selprov',
-          templateUrl: 'app/pages/articulos/articulos.html',
-          title: 'Sel. Proveedor',
+        })
+        .state('pedidos.nuevoPedido', {
+          url: '/nuevoPedido',
+          templateUrl: 'app/pages/articulos/pedido.html',
+          controller: 'PedidoPageCtrl',
+          controllerAs: 'vm',
+          title: 'Nuevo Pedido',
           sidebarMeta: {
             order: 101,
           },
-        });
-    $urlRouterProvider.when('/pedidoactual','/pedidoactual/articulos');
+        })
+        ;
+    $urlRouterProvider.when('/pedidoactual','/pedidoactual/nuevoPedido');
   }
 
 })();

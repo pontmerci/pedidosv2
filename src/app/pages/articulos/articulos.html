@@ -1,36 +1,11 @@
 <div class="widgets">
     <div class="row">
         <div class="col-md-12">
-            <h6>Prov. Seleccionado: <strong>PROVEEDOR1</strong></h6>
+            <h6>Proveedor del Pedido Actual: <strong>PROVEEDOR1</strong></h6>
         </div>
     </div>
-
-    <uib-accordion>
-        <uib-accordion-group panel-class="bootstrap-panel accordion-panel panel-primary">
-            <uib-accordion-heading>
-                Buscar Artículos <i class="fa pull-right fa-plus-circle"></i>
-            </uib-accordion-heading>
-            <div class="row">
-                <div class="col-md-12">
-                    <form class="row form-inline">
-                        <div class="form-group col-md-3">
-
-                        </div>
-                        <div class="form-group col-md-3">
-                            <input type="email" class="form-control" placeholder="Email">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <input type="email" class="form-control"  placeholder="Email">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send invitation</button>
-                    </form>
-
-                </div>
-            </div>
-
-        </uib-accordion-group>
-    </uib-accordion>
-
+    <div include-with-scope="app/pages/articulos/buscarArticulos.html"></div>
+    <!--// grilla-->
     <div class="row">
         <div class="col-md-12">
             <div ba-panel  ba-panel-class="with-scroll" ba-panel-title="Articulos encontrados">
@@ -54,8 +29,9 @@
                               <th st-sort="descripcion">Descripcion</th>
                               <th st-sort="unidades_caja">Pack</th>
                               <th class="align-right" st-sort="precio_1">Precio Unitario</th>
+                              <th class="align-right" st-sort="precio_2">Precio Pack</th>
                               <th class="align-right" st-sort="precio_4">Imp.Int/U</th>
-                              <!--<th st-sort="fecha_modificacion">Fec.Act.</th>-->
+                              <th st-sort="fecha_modificacion">Fec.Act.</th>
                               <th ></th>
                           </tr>
                           <tr>
@@ -69,6 +45,7 @@
                                          type="search"/>
                               </th>
                               <th></th>
+                              <th></th>
                           </tr>
                         </thead>
 
@@ -78,8 +55,9 @@
                               <td class="align-left">{{item.descripcion}}</td>
                               <td class="align-center">{{item.unidades_caja}}</td>
                               <td class="align-right">{{item.precio_1 | currency}}</td>
+                              <td class="align-right">{{item.precio_2 | currency}}</td>
                               <td class="align-right">{{item.precio_4 | currency}}</td>
-                              <!--<td class="align-center">{{item.fecha_modificacion}}</td>-->
+                              <td class="align-center">{{item.fecha_modificacion.substring(0, 10) | date:'dd/MM/yyyy' }}</td>
                               <td>
                                   <div class="buttons">
                                       <button ng-click="abrir(item)" class="btn btn-success btn-xs"><span class="fa fa-shopping-cart"></span></button>
@@ -102,21 +80,6 @@
         </div>
     </div>
 </div>
-<!--<script type="text/ng-template" id="agregarArticulo.html">
-    <div class="modal-content">
-        <div class="modal-header bg-success">
-            <i class="ion-checkmark modal-icon"></i><span> Agregar Articulo al Pedido</span>
-        </div>
-        <div class="modal-body text-center">
-            {{ articulo.descripcion }}
-
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-success" ng-click="$dismiss()">Agregar</button>
-            <button type="button" class="btn btn-danger" ng-click="$dismiss()">Cancelar</button>
-        </div>
-    </div>
-</script>-->
 
 
 
