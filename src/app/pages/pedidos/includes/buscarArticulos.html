@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">
-        <h5>Proveedor Seleccionado: <strong>{{ selProv.nombre }}</strong> </h5>
+        <h5>Proveedor: <strong>{{ pedido.proveedor.nombre }}</strong> </h5>
         <!--//  filtro-->
         <uib-accordion>
             <uib-accordion-group panel-class="bootstrap-panel accordion-panel panel-primary" is-open="true">
@@ -43,16 +43,14 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-with-icon"> <i class="fa fa-search" aria-hidden="true"></i>Buscar</button>
+                        <button ng-click="buscarArt()" type="submit" class="btn btn-primary btn-with-icon"> <i class="fa fa-search" aria-hidden="true"></i>Buscar</button>
 
                     </form>
 
             </uib-accordion-group>
         </uib-accordion>
         <!--grilla-->
-        <div ba-panel  ba-panel-class="with-scroll" ba-panel-title="Articulos encontrados">
-            <!--ba-panel-title="Articulos encontrados..."-->
-
+        <div ba-panel  ba-panel-class="with-scroll" ba-panel-title=" Articulos Encontrados: {{ smartTableData.length }}">
             <div class="table-responsive">
                 <div class="form-group select-page-size-wrap ">
                     <label>Filas
@@ -68,10 +66,11 @@
                     <tr class="sortable ">
                         <th class="table-id" st-sort="codarticulo" st-sort-default="true">Cod.</th>
                         <th st-sort="descripcion">Descripcion</th>
-                        <th st-sort="unidades_caja">Pack</th>
+                        <th st-sort="unidades_caja">U./Pack</th>
                         <th class="align-right" st-sort="precio_1">Precio Unitario</th>
                         <th class="align-right" st-sort="precio_2">Precio Pack</th>
-                        <th class="align-right" st-sort="precio_4">Imp.Int/U</th>
+                        <th class="align-right" st-sort="impuesto">IVA</th>
+                        <th class="align-right" st-sort="precio_4">Imp.Int.</th>
                         <th st-sort="fecha_modificacion">Fec.Act.</th>
                         <th ></th>
                     </tr>
@@ -81,10 +80,12 @@
                             <input st-search="descripcion" placeholder="Filtro por Descripcion..." class="input-sm form-control search-input"
                                    type="search"/>
                         </th>
-                        <th colspan="1">
+                        <th colspan="">
                             <input st-search="codarticulo" placeholder="Filtro por Codigo..." class="input-sm form-control search-input"
                                    type="search"/>
                         </th>
+                        <th></th>
+                        <th></th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -93,11 +94,12 @@
                     <tbody>
                     <tr ng-repeat="item in smartTableData">
                         <td class="table-id">{{item.codarticulo}}</td>
-                        <td class="align-left">{{item.descripcion}}</td>
+                        <td class="align-left">{{item.descripcion}} <p class="small-text">M:{{item.marca.toUpperCase()}} | R:{{item.rubro.toUpperCase()}}</p> </td>
                         <td class="align-center">{{item.unidades_caja}}</td>
                         <td class="align-right">{{item.precio_1 | currency}}</td>
                         <td class="align-right">{{item.precio_2 | currency}}</td>
-                        <td class="align-right">{{item.precio_4 | currency}}</td>
+                        <td class="align-right">{{item.impuesto}}%</td>
+                        <td class="align-center">{{item.precio_4?item.precio_4:0}}%</td>
                         <td class="align-center">{{item.fecha_modificacion.substring(0, 10) | date:'dd/MM/yyyy' }}</td>
                         <td>
                             <div class="buttons">
@@ -109,7 +111,7 @@
 
                     <tfoot>
                     <tr>
-                        <td colspan="6" class="text-center">
+                        <td colspan="9" class="text-center">
                             <div st-pagination="" st-items-by-page="smartTablePageSize" st-displayed-pages="5"></div>
                         </td>
                     </tr>

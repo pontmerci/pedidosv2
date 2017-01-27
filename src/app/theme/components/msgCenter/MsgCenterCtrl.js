@@ -12,20 +12,7 @@
   function MsgCenterCtrl($scope) {
 
 
-      $scope.pedido = {proveedor:'PROVEEDOR1',
-          items:[
-              {renglon:1,descripcion:'ITEM1',cantidad:2,precio:12.4},
-              {renglon:2,descripcion:'ITEM1',cantidad:2,precio:12.4},
-              {renglon:3,descripcion:'ITEM1',cantidad:2,precio:12.4},
-              {renglon:4,descripcion:'ITEM1',cantidad:2,precio:12.4}
-              ],
-          subtotal: 100.00,
-          iva1: 21.00,
-          iva2: 1.50,
-          imp: 0.00,
-          total: 122.50
-      };
-      $scope.itemcount = $scope.pedido.items.length; // ;
+      $scope.descripcion = window.sessionStorage.getItem("descripcion");
 
 
 

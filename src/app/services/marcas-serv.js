@@ -9,7 +9,7 @@
         .factory('MarcasSrv', MarcasSrv);
 
     /** @ngInject */
-    function MarcasSrv($log, $http, $q) {
+    function MarcasSrv($log, $http, $q, Config) {
 
         var metodos = {
             getMarcas: getMarcas,
@@ -24,7 +24,7 @@
             } else {
                 args = "";
             }
-            $http.get('http://provinciasunidasltd.com.ar/apiv1/public/api.php/marcas'+args).then(function (data) {
+            $http.get(Config.ENV.SERVER+'marcas'+args).then(function (data) {
                 $log.log(data.data);
                 d.resolve(data.data);
             });

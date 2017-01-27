@@ -20,9 +20,10 @@
         padding-top: 1px;
       }
       & > td {
-        padding: 0px 8px;
-        line-height: 35px;
+        padding: 5px 8px;
+        line-height: normal; //35px;
         border-top: 1px solid $border-light;
+        vertical-align: middle;
         &:first-child {
           text-align: center;
         }

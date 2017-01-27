@@ -47,6 +47,22 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-xs-6">
+                        <p>IVA:</p>
+                    </div>
+                    <div class="col-xs-6">
+                        <p><strong>{{ artSel.impuesto }}%</strong></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <p>Imp. Interno:</p>
+                    </div>
+                    <div class="col-xs-6">
+                        <p><strong>{{ item.precio_4?item.precio_4:0 }}%</strong></p>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-xs-12">
                         <div class="input-group" style="width: 250px;">
                             <span class="input-group-addon input-group-addon-primary addon-left" style="color:#FFFFFF" >Cant. Packs</span>
@@ -56,10 +72,26 @@
                 </div>
                 <div class="row" >
                     <div class="col-xs-6">
-                        <p><strong>Total: </strong></p>
+                        <p><strong>Subotal: </strong></p>
                     </div>
                     <div class="col-xs-6">
                         <p><strong>{{ (artSel.precio_2 * artSel.cantidad) | currency }}</strong></p>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col-xs-6">
+                        <p><strong>IVA {{ artSel.impuesto }}%: </strong></p>
+                    </div>
+                    <div class="col-xs-6">
+                        <p><strong>{{ (artSel.precio_2 * artSel.cantidad) * (artSel.impuesto/100) | currency }}</strong></p>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col-xs-6">
+                        <p><strong>Total: </strong></p>
+                    </div>
+                    <div class="col-xs-6">
+                        <p><strong>{{ (artSel.precio_2 * artSel.cantidad) * (1 + (artSel.impuesto/100)) | currency }}</strong></p>
                     </div>
                 </div>
             </div>

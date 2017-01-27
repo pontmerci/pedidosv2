@@ -9,7 +9,7 @@
         .factory('ArticulosSrv', ArticulosSrv);
 
     /** @ngInject */
-    function ArticulosSrv($log, $http, $q) {
+    function ArticulosSrv($log, $http, $q, Config) {
 
         var metodos = {
             getArticulos: getArticulos,
@@ -25,7 +25,7 @@
             } else {
                 args = "";
             }
-            $http.get('http://provinciasunidasltd.com.ar/apiv1/public/api.php/articulos'+args).then(function (data) {
+            $http.get(Config.ENV.SERVER+'articulos'+args).then(function (data) {
                 $log.log(data.data);
                 d.resolve(data.data);
             });

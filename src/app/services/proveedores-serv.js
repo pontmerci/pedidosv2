@@ -9,7 +9,7 @@
         .factory('ProveedoresSrv', ProveedoresSrv);
 
     /** @ngInject */
-    function ProveedoresSrv($log, $http, $q) {
+    function ProveedoresSrv($log, $http, $q, Config) {
 
         var metodos = {
             getProveedores: getProveedores,
@@ -24,7 +24,7 @@
             } else {
                 args = "";
             }
-            $http.get('http://provinciasunidasltd.com.ar/apiv1/public/api.php/proveedores'+args).then(function (data) {
+            $http.get(Config.ENV.SERVER+'proveedores'+args).then(function (data) {
                 $log.log(data.data);
                 d.resolve(data.data);
             });

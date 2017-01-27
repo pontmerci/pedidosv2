@@ -1,0 +1,10 @@
+<div class="modal-content">
+  <div class="modal-header bg-danger">
+    <i class="ion-flame modal-icon"></i><span> ATENCION!</span>
+  </div>
+  <div class="modal-body text-center">Si cambia de proveedor se reseteará el pedido actual. Esta seguro que desea continuar?</div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" ng-click="cambiaProveedor(true);$dismiss()">SI</button>
+      <button type="button" class="btn btn-danger" ng-click="cambiaProveedor(false);$dismiss()">NO</button>
+  </div>
+</div>

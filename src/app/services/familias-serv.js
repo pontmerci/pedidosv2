@@ -9,7 +9,7 @@
         .factory('FamiliasSrv', FamiliasSrv);
 
     /** @ngInject */
-    function FamiliasSrv($log, $http, $q) {
+    function FamiliasSrv($log, $http, $q, Config) {
 
         // rubros
 
@@ -26,7 +26,7 @@
             } else {
                 args = "";
             }
-            $http.get('http://provinciasunidasltd.com.ar/apiv1/public/api.php/familias'+args).then(function (data) {
+            $http.get(Config.ENV.SERVER+'familias'+args).then(function (data) {
                 $log.log(data.data);
                 d.resolve(data.data);
             });

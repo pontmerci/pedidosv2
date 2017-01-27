@@ -1,0 +1,61 @@
+<div class="panel panel-default bootstrap-panel">
+    <div class="panel-heading">Proveedor: <strong>{{ pedido.proveedor.nombre }}</strong></div>
+    <div class="panel-body footer-panel">
+        <table class="table table-striped table-condensed">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Articulo</th>
+                <th class="align-center">U./Pack</th>
+                <th class="align-right">Precio Pack</th>
+                <th class="align-center">IVA</th>
+                <th style="text-align: center">Cant.Packs</th>
+                <th class="align-right">Total</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in pedido.articulos">
+                <td>{{ $index + 1 }}</td>
+                <td class="nowrap">{{ item.descripcion }}</td>
+                <td class="align-center">{{ item.unidades_caja }}</td>
+                <td class="align-right">{{ item.precio_2 | currency }}</td>
+                <td class="align-center">{{ item.impuesto }}%</td>
+                <td  class="align-right" style=" width: 150px">
+                    <input ng-change="modificaCantidad()" style="text-align: right;" ng-model="item.cantidad" type="number" class="form-control" placeholder="0" >
+                </td>
+                <td class="align-right">{{ (item.cantidad * item.precio_2) | currency }}</td>
+                <td class="align-right"><button type="button" ng-click="eliminaArt($index)" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></button></td>
+            </tr>
+            </tbody>
+
+            <tfoot>
+            <tr>
+                <td colspan="8"></td>
+            </tr>
+            <tr>
+                <td colspan="7" class="align-right">Subtotal</td>
+                <td class="align-right">{{ pedido.subtotal | currency }}</td>
+            </tr>
+            <tr>
+                <td colspan="7" class="align-right">IVA 21%</td>
+                <td class="align-right">{{ pedido.totalIVA21 | currency }}</td>
+            </tr>
+            <tr>
+                <td colspan="7" class="align-right">IVA 10,5%</td>
+                <td class="align-right">{{ pedido.totalIVA10 | currency }}</td>
+            </tr>
+            <tr>
+                <td colspan="7" class="align-right">Imp. Interno</td>
+                <td class="align-right">{{ pedido.totalImpuestos | currency }}</td>
+            </tr>
+            <tr>
+                <td colspan="7" class="align-right"><strong>TOTAL</strong></td>
+                <td class="align-right"><strong>{{ pedido.total | currency }}</strong></td>
+            </tr>
+
+            </tfoot>
+        </table>
+    </div>
+
+</div>

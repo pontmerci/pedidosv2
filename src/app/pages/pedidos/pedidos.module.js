@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  angular.module('BlurAdmin.pages.articulos', [])
+  angular.module('BlurAdmin.pages.pedidos', [])
     .config(routeConfig);
 
   /** @ngInject */
@@ -23,7 +23,7 @@
         })
         .state('pedidos.nuevoPedido', {
           url: '/nuevoPedido',
-          templateUrl: 'app/pages/articulos/pedido.html',
+          templateUrl: 'app/pages/pedidos/pedido.html',
           controller: 'PedidoPageCtrl',
           controllerAs: 'vm',
           title: 'Nuevo Pedido',

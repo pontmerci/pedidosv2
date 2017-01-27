@@ -11,6 +11,7 @@ angular.module('loginApp', [])
             $log.log(data.data);
             if (data.data.valida){
                 window.sessionStorage.setItem("token",data.data.token);
+                window.sessionStorage.setItem("descripcion",data.data.descripcion);
                 $window.location.href = "/";
             }
         },function (err) {

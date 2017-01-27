@@ -5,13 +5,13 @@
             <div ba-panel ba-panel-class="with-scroll">
                 <ba-wizard>
                     <ba-wizard-step title="Seleccionar Proveedor" form="vm.proveedorForm">
-                        <div include-with-scope="app/pages/articulos/seleccionarProveedor.html"></div>
+                        <div include-with-scope="app/pages/pedidos/includes/seleccionarProveedor.html"></div>
                     </ba-wizard-step>
                     <ba-wizard-step title="Agregar Articulos" >
-                        <div include-with-scope="app/pages/articulos/buscarArticulos.html"></div>
+                        <div include-with-scope="app/pages/pedidos/includes/buscarArticulos.html"></div>
                     </ba-wizard-step>
                     <ba-wizard-step title="Editar Pedido"  form="vm.pedidoForm">
-                        <div include-with-scope="app/pages/articulos/editarPedido.html"></div>
+                        <div include-with-scope="app/pages/pedidos/includes/editarPedido.html"></div>
                     </ba-wizard-step>
                     <ba-wizard-step title="Finalizar">
                         <form class="form-horizontal" name="vm.finishForm" novalidate>

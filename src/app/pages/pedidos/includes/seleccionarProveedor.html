@@ -1,21 +1,27 @@
 <div class="row">
     <div class="col-md-12">
+        <h3 ng-if="pedido.proveedor.nombre">Proveedor Seleccionado: <strong>{{ pedido.proveedor.nombre }}</strong></h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
         <form name="vm.proveedorForm" novalidate>
             <div class="row">
                 <div class="col-md-12">
                     <div ba-panel >
                         <div class="form-group has-feedback"
                              ng-class="{'has-error': vm.proveedorForm.proveedor.$invalid && (vm.proveedorForm.proveedor.$dirty || vm.proveedorForm.$submitted)}">
-                            <!--<label>Proveedor</label>-->
+                            <label>Proveedores:</label>
                             <select class="form-control with-search" data-live-search="true" title="Proveedor..."
                                     name="proveedor"
+                                    id="proveedor"
                                     selectpicker
                                     ng-model="selProv"
-                                    ng-change="cambiaProveedor(selProv)"
+                                    ng-change="abrirCambioProv(selProv)"
                                     ng-options="item as item.nombre for item in proveedores"
                                     required>
                             </select>
-                            <span class="help-block error-block basic-block">Required</span>
+                            <span class="help-block error-block basic-block">Requerido</span>
                         </div>
                     </div>
                 </div>

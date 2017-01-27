@@ -11,6 +11,8 @@
   /** @ngInject */
   function PageTopCtrl($log, $scope, $window) {
 
+    $scope.descripcion = window.sessionStorage.getItem("descripcion");
+
     $scope.salir = function () {
         $log.log('Chau!');
         window.sessionStorage.clear();
