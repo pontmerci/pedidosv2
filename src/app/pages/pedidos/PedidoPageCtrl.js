@@ -19,11 +19,15 @@
       PedidoSrv.getPedidoActual().then(function (data) {
           $scope.pedido=data;
           $scope.itemcount = data.articulos.length;
+          $log.log(data.proveedor);
           if(data.proveedor){
               $scope.selProv = data.proveedor;
-              var args = '/filtro/artpro.codproveedor,=,'+data.proveedor.codproveedor;
+              //var args = '/filtro/artpro.codproveedor,=,'+data.proveedor.codproveedor;
+              var args = '/artpro/'+data.proveedor.codproveedor+'/1,=,1';
+              $log.log(args);
               ArticulosSrv.getArticulos(args).then(function (data) {
-                  //$log.log(data.data);
+                  $log.log('art:');
+                  $log.log(data);
                   $scope.smartTableData = data;
                   $scope.cargado=true;
               });
@@ -51,6 +55,8 @@
       var args = "/filtro/borrado,<>,'S',and,rotacion,=,'S'";
       ProveedoresSrv.getProveedores(args).then(function (data) {
           $scope.proveedores = data;
+          var sobrante = {"codproveedor":"-100","nombre":"Sobrante Portal","nif":null,"direccion":null,"codprovincia":null,"localidad":null,"codentidad":null,"cuentabancaria":null,"codpostal":null,"telefono":null,"movil":null,"email":null,"web":null,"borrado":"","rotacion":"S","fecha_modificacion":null};
+          $scope.proveedores.unshift(sobrante);
           $scope.cargado=true;
       });
 
@@ -58,7 +64,8 @@
           $scope.cargado=false;
           $scope.smartTableData = [];
           $scope.smartTablePageSize = 25;
-          var args = '/filtro/artpro.codproveedor,=,'+ $scope.pedido.proveedor.codproveedor;
+          //var args = '/filtro/artpro.codproveedor,=,'+ $scope.pedido.proveedor.codproveedor;
+          var args = '/artpro/'+$scope.pedido.proveedor.codproveedor+'/1,=,1';
           if($scope.filtro.rubro){
               args += ',and,articulos.codfamilia,=,' + $scope.filtro.rubro.codfamilia;
           }
@@ -109,7 +116,8 @@
               $scope.pedido.proveedor = $scope.provSel;
               PedidoSrv.setPedidoActual($scope.pedido).then(function (data) {
                   $scope.pedido = data;
-                  var args = '/filtro/artpro.codproveedor,=,'+$scope.pedido.proveedor.codproveedor;
+                  //var args = '/filtro/artpro.codproveedor,=,'+$scope.pedido.proveedor.codproveedor;
+                  var args = '/artpro/'+$scope.pedido.proveedor.codproveedor+'/1,=,1';
                   ArticulosSrv.getArticulos(args).then(function (data) {
                       //$log.log(data.data);
                       $scope.smartTableData = data;

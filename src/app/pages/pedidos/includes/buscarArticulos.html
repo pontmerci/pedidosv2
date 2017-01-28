@@ -66,7 +66,7 @@
                     <tr class="sortable ">
                         <th class="table-id" st-sort="codarticulo" st-sort-default="true">Cod.</th>
                         <th st-sort="descripcion">Descripcion</th>
-                        <th st-sort="unidades_caja">U./Pack</th>
+                        <th class="align-center" st-sort="unidades_caja" style="width: 10px;">U./Pack</th>
                         <th class="align-right" st-sort="precio_1">Precio Unitario</th>
                         <th class="align-right" st-sort="precio_2">Precio Pack</th>
                         <th class="align-right" st-sort="impuesto">IVA</th>
@@ -94,7 +94,11 @@
                     <tbody>
                     <tr ng-repeat="item in smartTableData">
                         <td class="table-id">{{item.codarticulo}}</td>
-                        <td class="align-left">{{item.descripcion}} <p class="small-text">M:{{item.marca.toUpperCase()}} | R:{{item.rubro.toUpperCase()}}</p> </td>
+                        <td class="align-left">{{item.descripcion}}
+                            <span ng-show="item.oferta==='S'" class="fa fa-tags text-danger" > Oferta!</span>
+                            <p class="small-text">M:{{item.marca.toUpperCase()}} | R:{{item.rubro.toUpperCase()}} {{ pedido.proveedor.codproveedor=='-100'?' | S:'+item.stock2:'' }}</p>
+                            <!--<span ng-show="pedido.proveedor.codproveedor=='-100'" class="small-text">STOCK:{{ item.stock2 }}</span>-->
+                        </td>
                         <td class="align-center">{{item.unidades_caja}}</td>
                         <td class="align-right">{{item.precio_1 | currency}}</td>
                         <td class="align-right">{{item.precio_2 | currency}}</td>
