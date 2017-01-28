@@ -242,7 +242,7 @@ input.search-input {
 }
 
 .table-striped > tbody > tr:nth-of-type(odd) {
-  background-color: rgba(0, 0, 0, 0.1);
+  //background-color: rgba(0, 0, 0, 0.1);
 }
 
 @mixin color-row($color) {

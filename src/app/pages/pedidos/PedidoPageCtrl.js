@@ -48,7 +48,8 @@
 
       $scope.cargado=false;
       $scope.proveedores = [];
-      ProveedoresSrv.getProveedores().then(function (data) {
+      var args = "/filtro/borrado,<>,'S',and,rotacion,=,'S'";
+      ProveedoresSrv.getProveedores(args).then(function (data) {
           $scope.proveedores = data;
           $scope.cargado=true;
       });
@@ -116,7 +117,7 @@
                   });
               });
           }else{
-              $scope.provSel = null;
+              $scope.provSel = 0;
               toastr.success('', 'Cambio de Proveedor Cancelado.', {
                   "autoDismiss": true,
                   "positionClass": "toast-top-right",
