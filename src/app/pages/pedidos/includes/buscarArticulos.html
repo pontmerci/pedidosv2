@@ -25,21 +25,47 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label >Marca</label>
-                                    <select class="form-control with-search" data-live-search="true" title="Marca..."
-                                            selectpicker
-                                            ng-model="filtro.marca"
-                                            ng-options="item as item.nombre for item in marcas">
-                                    </select>
+                                    <!--<select class="form-control with-search" data-live-search="true" title="Marca..."-->
+                                            <!--selectpicker-->
+                                            <!--ng-model="filtro.marca"-->
+                                            <!--ng-options="item as item.nombre for item in marcas">-->
+                                    <!--</select>-->
+                                    <ui-select ng-model="filtro.marca"
+                                               class="btn-group bootstrap-select form-control"
+                                               ng-disabled="false"
+                                               append-to-body="true"
+                                               search-enabled="true">
+                                        <ui-select-match placeholder="Seleccionar Marca...">
+                                            {{$select.selected.nombre}}
+                                        </ui-select-match>
+                                        <ui-select-choices
+                                                repeat="withSearchItem in marcas | filter: $select.search">
+                                            <span ng-bind-html="withSearchItem.nombre"></span>
+                                        </ui-select-choices>
+                                    </ui-select>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label >Rubro</label>
-                                    <select class="form-control with-search" data-live-search="true" title="Rubro..."
-                                            selectpicker
-                                            ng-model="filtro.rubro"
-                                            ng-options="item as item.nombre for item in rubros">
-                                    </select>
+                                    <!--<select class="form-control with-search" data-live-search="true" title="Rubro..."-->
+                                            <!--selectpicker-->
+                                            <!--ng-model="filtro.rubro"-->
+                                            <!--ng-options="item as item.nombre for item in rubros">-->
+                                    <!--</select>-->
+                                    <ui-select ng-model="filtro.rubro"
+                                               class="btn-group bootstrap-select form-control"
+                                               ng-disabled="false"
+                                               append-to-body="true"
+                                               search-enabled="true">
+                                        <ui-select-match placeholder="Seleccionar Rubro...">
+                                            {{$select.selected.nombre}}
+                                        </ui-select-match>
+                                        <ui-select-choices
+                                                repeat="withSearchItem in rubros | filter: $select.search">
+                                            <span ng-bind-html="withSearchItem.nombre"></span>
+                                        </ui-select-choices>
+                                    </ui-select>
                                 </div>
                             </div>
                         </div>
