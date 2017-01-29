@@ -12,21 +12,47 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label >Marca</label>
-                                    <select class="form-control with-search" data-live-search="true" title="Marca..."
-                                            selectpicker
-                                            ng-model="filtro.marca"
-                                            ng-options="item as item.nombre for item in marcas">
-                                    </select>
+                                    <!--<select class="form-control with-search" data-live-search="true" title="Marca..."-->
+                                            <!--selectpicker-->
+                                            <!--ng-model="filtro.marca"-->
+                                            <!--ng-options="item as item.nombre for item in marcas">-->
+                                    <!--</select>-->
+                                    <ui-select ng-model="filtro.marca"
+                                               class="btn-group bootstrap-select form-control"
+                                               ng-disabled="false"
+                                               append-to-body="true"
+                                               search-enabled="true">
+                                        <ui-select-match placeholder="Seleccionar Marca...">
+                                            {{$select.selected.nombre}}
+                                        </ui-select-match>
+                                        <ui-select-choices
+                                                repeat="withSearchItem in marcas | filter: $select.search">
+                                            <span ng-bind-html="withSearchItem.nombre"></span>
+                                        </ui-select-choices>
+                                    </ui-select>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label >Rubro</label>
-                                    <select class="form-control with-search" data-live-search="true" title="Rubro..."
-                                            selectpicker
-                                            ng-model="filtro.rubro"
-                                            ng-options="item as item.nombre for item in rubros">
-                                    </select>
+                                    <!--<select class="form-control with-search" data-live-search="true" title="Rubro..."-->
+                                            <!--selectpicker-->
+                                            <!--ng-model="filtro.rubro"-->
+                                            <!--ng-options="item as item.nombre for item in rubros">-->
+                                    <!--</select>-->
+                                    <ui-select ng-model="filtro.rubro"
+                                               class="btn-group bootstrap-select form-control"
+                                               ng-disabled="false"
+                                               append-to-body="true"
+                                               search-enabled="true">
+                                        <ui-select-match placeholder="Seleccionar Rubro...">
+                                            {{$select.selected.nombre}}
+                                        </ui-select-match>
+                                        <ui-select-choices
+                                                repeat="withSearchItem in rubros | filter: $select.search">
+                                            <span ng-bind-html="withSearchItem.nombre"></span>
+                                        </ui-select-choices>
+                                    </ui-select>
                                 </div>
                             </div>
                         </div>
@@ -53,7 +79,7 @@
                     <tr class="sortable ">
                         <th class="table-id" st-sort="codarticulo" st-sort-default="true">Cod.</th>
                         <th st-sort="descripcion">Descripcion</th>
-                        <th st-sort="unidades_caja">U./Pack</th>
+                        <th class="align-center" st-sort="unidades_caja" style="width: 10px;">U./Pack</th>
                         <th class="align-right" st-sort="precio_1">Precio Unitario</th>
                         <th class="align-right" st-sort="precio_2">Precio Pack</th>
                         <th class="align-right" st-sort="impuesto">IVA</th>
@@ -81,7 +107,11 @@
                     <tbody>
                     <tr ng-repeat="item in smartTableData">
                         <td class="table-id">{{item.codarticulo}}</td>
-                        <td class="align-left">{{item.descripcion}} <p class="small-text">M:{{item.marca.toUpperCase()}} | R:{{item.rubro.toUpperCase()}}</p> </td>
+                        <td class="align-left">{{item.descripcion}}
+                            <span ng-show="item.oferta==='S'" class="fa fa-tags text-danger" > Oferta!</span>
+                            <p class="small-text">M:{{item.marca.toUpperCase()}} | R:{{item.rubro.toUpperCase()}} {{ pedido.proveedor.codproveedor=='-100'?' | S:'+item.stock2:'' }}</p>
+                            <!--<span ng-show="pedido.proveedor.codproveedor=='-100'" class="small-text">STOCK:{{ item.stock2 }}</span>-->
+                        </td>
                         <td class="align-center">{{item.unidades_caja}}</td>
                         <td class="align-right">{{item.precio_1 | currency}}</td>
                         <td class="align-right">{{item.precio_2 | currency}}</td>

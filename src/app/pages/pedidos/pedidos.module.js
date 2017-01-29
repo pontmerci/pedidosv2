@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  angular.module('BlurAdmin.pages.pedidos', [])
+  angular.module('BlurAdmin.pages.pedidos', ['ui.select', 'ngSanitize'])
     .config(routeConfig);
 
   /** @ngInject */

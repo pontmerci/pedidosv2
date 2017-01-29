@@ -12,7 +12,7 @@
                         <div class="form-group has-feedback"
                              ng-class="{'has-error': vm.proveedorForm.proveedor.$invalid && (vm.proveedorForm.proveedor.$dirty || vm.proveedorForm.$submitted)}">
                             <label>Proveedores:</label>
-                            <select class="form-control with-search" data-live-search="true" title="Proveedor..."
+                            <!--<select class="form-control with-search" data-live-search="true" title="Proveedor..."
                                     name="proveedor"
                                     id="proveedor"
                                     selectpicker
@@ -20,7 +20,25 @@
                                     ng-change="abrirCambioProv(selProv)"
                                     ng-options="item as item.nombre for item in proveedores"
                                     required>
-                            </select>
+                            </select>-->
+
+                            <ui-select ng-model="selProv"
+                                       ng-change="abrirCambioProv(selProv)"
+                                       class="btn-group bootstrap-select form-control"
+                                       ng-disabled="false"
+                                       append-to-body="true"
+                                       search-enabled="true">
+                                <ui-select-match placeholder="Seleccionar proveedor...">
+                                    {{$select.selected.nombre}}
+                                </ui-select-match>
+                                <ui-select-choices
+                                        repeat="withSearchItem in proveedores | filter: $select.search">
+                                    <span ng-bind-html="withSearchItem.nombre"></span>
+                                </ui-select-choices>
+                            </ui-select>
+
+
+
                             <span class="help-block error-block basic-block">Requerido</span>
                         </div>
                     </div>

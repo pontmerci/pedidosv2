@@ -12,23 +12,48 @@
   function PedidoPageCtrl($log, $scope, PedidoSrv, ArticulosSrv, ProveedoresSrv, FamiliasSrv, MarcasSrv, $timeout, baProgressModal, $uibModal, toastr) {
 
       $scope.cargado=false;
+
       $scope.filtro = {rubro:'',marca:''};
       $scope.smartTableData = [];
-      $scope.smartTablePageSize = 25;
+      $scope.smartTablePageSize = 5;
       $scope.selProv;
       PedidoSrv.getPedidoActual().then(function (data) {
           $scope.pedido=data;
           $scope.itemcount = data.articulos.length;
+          $log.log(data.proveedor);
           if(data.proveedor){
               $scope.selProv = data.proveedor;
-              var args = '/filtro/artpro.codproveedor,=,'+data.proveedor.codproveedor;
-              ArticulosSrv.getArticulos(args).then(function (data) {
-                  //$log.log(data.data);
-                  $scope.smartTableData = data;
-                  $scope.cargado=true;
-              });
+              //var args = '/filtro/artpro.codproveedor,=,'+data.proveedor.codproveedor;
+              var args = '/artpro/'+data.proveedor.codproveedor+'/1,=,1';
+              $log.log(args);
+              ArticulosSrv.getArticulos(args).then(recuperaArticulo, callback);
           }
       });
+
+      function recuperaArticulo(data) {
+          $scope.smartTableData = data;
+          $scope.cargado=true;
+      }
+
+      function callback(err) {
+          $log.log(err);
+          toastr.error(err, 'Ha ocurrido un problema.', {
+              "autoDismiss": true,
+              "positionClass": "toast-top-right",
+              "type": "error",
+              "timeOut": "1000",
+              "extendedTimeOut": "1000",
+              "allowHtml": false,
+              "closeButton": false,
+              "tapToDismiss": true,
+              "progressBar": false,
+              "newestOnTop": true,
+              "maxOpened": 0,
+              "preventDuplicates": false,
+              "preventOpenDuplicates": false
+          });
+          $scope.cargado=true;
+      }
 
       $scope.cargado=false;
       $scope.rubros = [];
@@ -51,14 +76,16 @@
       var args = "/filtro/borrado,<>,'S',and,rotacion,=,'S'";
       ProveedoresSrv.getProveedores(args).then(function (data) {
           $scope.proveedores = data;
+          var sobrante = {"codproveedor":"-100","nombre":"Sobrante Portal","nif":null,"direccion":null,"codprovincia":null,"localidad":null,"codentidad":null,"cuentabancaria":null,"codpostal":null,"telefono":null,"movil":null,"email":null,"web":null,"borrado":"","rotacion":"S","fecha_modificacion":null};
+          $scope.proveedores.unshift(sobrante);
           $scope.cargado=true;
       });
 
       $scope.buscarArt = function () {
           $scope.cargado=false;
           $scope.smartTableData = [];
-          $scope.smartTablePageSize = 25;
-          var args = '/filtro/artpro.codproveedor,=,'+ $scope.pedido.proveedor.codproveedor;
+          //var args = '/filtro/artpro.codproveedor,=,'+ $scope.pedido.proveedor.codproveedor;
+          var args = '/artpro/'+$scope.pedido.proveedor.codproveedor+'/1,=,1';
           if($scope.filtro.rubro){
               args += ',and,articulos.codfamilia,=,' + $scope.filtro.rubro.codfamilia;
           }
@@ -67,11 +94,7 @@
           }
           $log.log('FILTRO ARTICULOS');
           $log.log(args);
-          ArticulosSrv.getArticulos(args).then(function (data) {
-              //$log.log(data.data);
-              $scope.smartTableData = data;
-              $scope.cargado=true;
-          });
+          ArticulosSrv.getArticulos(args).then(recuperaArticulo, callback);
       }
 
       $scope.abrirCambioProv = function (p) {
@@ -109,12 +132,9 @@
               $scope.pedido.proveedor = $scope.provSel;
               PedidoSrv.setPedidoActual($scope.pedido).then(function (data) {
                   $scope.pedido = data;
-                  var args = '/filtro/artpro.codproveedor,=,'+$scope.pedido.proveedor.codproveedor;
-                  ArticulosSrv.getArticulos(args).then(function (data) {
-                      //$log.log(data.data);
-                      $scope.smartTableData = data;
-                      $scope.cargado=true;
-                  });
+                  //var args = '/filtro/artpro.codproveedor,=,'+$scope.pedido.proveedor.codproveedor;
+                  var args = '/artpro/'+$scope.pedido.proveedor.codproveedor+'/1,=,1';
+                  ArticulosSrv.getArticulos(args).then(recuperaArticulo, callback);
               });
           }else{
               $scope.provSel = 0;
