@@ -6,30 +6,27 @@
     'use strict';
 
     angular.module('BlurAdmin.pages')
-        .factory('CuentaCorrienteSrv', CuentaCorrienteSrv);
+        .factory('UsuarioSrv', UsuarioSrv);
 
     /** @ngInject */
-    function CuentaCorrienteSrv($log, $http, $q, $window, Config) {
-
+    function UsuarioSrv($http, $q, Config) {
 
         var metodos = {
-            getMovimientos: getMovimientos,
+            getUsuario: getUsuario,
         };
         return metodos;
 
-        function getMovimientos(args) {
+        function getUsuario(token) {
             var d = $q.defer();
             var p = d.promise;
-            $http.get(Config.ENV.SERVER+'cuenta_corriente/'+args.cuenta+'/'+args.fechaIni+'/'+args.fechaFin).then(function (data) {
+
+            $http.get(Config.ENV.SERVER+'adj_usuarios/'+token).then(function (data) {
                 //$log.log(data.data);
                 d.resolve(data.data);
             });
-
             return p;
+
         }
-
-
     }
-
 })();
 
