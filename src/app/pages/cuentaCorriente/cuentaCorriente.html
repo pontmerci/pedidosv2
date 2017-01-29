@@ -1,0 +1,45 @@
+<div class="widgets">
+    <progress-bar-round ng-if="!cargado"></progress-bar-round>
+    <div class="row">
+        <div class="col-md-12">
+            <div ba-panel ba-panel-class="with-scroll">
+                <uib-accordion>
+                    <uib-accordion-group panel-class="bootstrap-panel accordion-panel panel-primary" is-open="true">
+                        <uib-accordion-heading>
+                            Buscar Movimientos <i class="fa pull-right ion-navicon-round" ></i>
+                        </uib-accordion-heading>
+                        <form ng-submit="recuperar()">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label >Marca</label>
+                                        <select class="form-control with-search" data-live-search="true" title="Marca..."
+                                                selectpicker
+                                                ng-model="filtro.marca"
+                                                ng-options="item as item.nombre for item in marcas">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label >Rubro</label>
+                                        <select class="form-control with-search" data-live-search="true" title="Rubro..."
+                                                selectpicker
+                                                ng-model="filtro.rubro"
+                                                ng-options="item as item.nombre for item in rubros">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-with-icon"> <i class="fa fa-search" aria-hidden="true"></i>Buscar</button>
+
+                        </form>
+
+                    </uib-accordion-group>
+                </uib-accordion>
+
+            </div>
+        </div>
+    </div>
+
+</div>

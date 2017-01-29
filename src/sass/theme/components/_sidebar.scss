@@ -139,7 +139,8 @@ a.al-sidebar-list-link {
       color: $sidebar-text;
       padding-left: 52px;
       height: auto;
-      line-height: 29px;
+      //line-height: 29px;
+      line-height: auto;
       &:hover {
         color: $primary;
       }

@@ -7,20 +7,7 @@
                 <uib-accordion-heading>
                     Buscar Artículos <i class="fa pull-right ion-navicon-round" ></i>
                 </uib-accordion-heading>
-                    <form ng-submit="buscar()">
-                        <!--<div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label >Proveedor</label>
-                                    <select class="form-control with-search" data-live-search="true" title="Proveedor..."
-                                            selectpicker
-                                            ng-model="filtro.proveedor"
-                                            ng-options="item as item.nombre for item in proveedores">
-                                    </select>
-                                </div>
-                            </div>
-
-                        </div>-->
+                    <form ng-submit="buscarArt()">
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -43,7 +30,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button ng-click="buscarArt()" type="submit" class="btn btn-primary btn-with-icon"> <i class="fa fa-search" aria-hidden="true"></i>Buscar</button>
+                        <button type="submit" class="btn btn-primary btn-with-icon"> <i class="fa fa-search" aria-hidden="true"></i>Buscar</button>
 
                     </form>
 

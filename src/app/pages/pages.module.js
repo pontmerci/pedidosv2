@@ -13,6 +13,7 @@
     // 'BlurAdmin.pages.form',
     // 'BlurAdmin.pages.tables',
     'BlurAdmin.pages.pedidos',
+    'BlurAdmin.pages.cuentaCorriente',
     // 'BlurAdmin.pages.charts',
     // 'BlurAdmin.pages.maps',
     // 'BlurAdmin.pages.profile',
