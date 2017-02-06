@@ -17,7 +17,7 @@
           abstract: true,
           title: 'Cuenta Corriente',
           sidebarMeta: {
-            icon: 'ion-grid',
+            icon: 'ion-android-list',
             order: 200,
           },
         })

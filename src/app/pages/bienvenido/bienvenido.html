@@ -1,0 +1,43 @@
+<div class="row-fluid">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div ba-panel ba-panel-class="banner-column-panel">
+            <div class="banner">
+                <div class="large-banner-wrapper">
+                    <img ng-src="{{::( 'app/typography/banner.png' | appImage )}}" alt=""/>
+                </div>
+                <div class="banner-text-wrapper">
+                    <div class="banner-text">
+                        <saludo></saludo>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h4>Cómo realizar un pedido?</h4>
+                        <div class="img-wrapper"><img ng-src="{{::( 'app/typography/typo04.png' | appImage )}}" alt=""/></div>
+                        <p>Seleccione el menu Pedidos -> Nuevo Pedido y continue con el asistente seleccionando un proveedor, luego agregando articulos al
+                        pedido y puede editar el pedido y luego finalmente guardaro y enviarlo.</p>
+                        <a href="#/pedidos/nuevoPedido" class="learn-more">Nuevo Pedido</a>
+                    </div>
+                    <div class="col-sm-4">
+                        <h4>Cómo ver mis movimientos?</h4>
+                        <div class="img-wrapper"><img ng-src="{{::( 'app/typography/typo05.png' | appImage )}}" alt=""/></div>
+                        <p>Selecciones el menu Cuenta Corriente -> Listado de Movimientos ingrese un rango de fechas y
+                        podra visualizar el listado, en algunos comprobantes podra ver el detalle del mismo. Además podrá
+                        imprimir los movimientos visualizados.</p>
+                        <a href="#/cuentacorriente/listado" class="learn-more">Ver Movimientos</a>
+                    </div>
+                    <div class="col-sm-4">
+                        <h4>Listas de Precio</h4>
+                        <div class="img-wrapper"><img ng-src="{{::( 'app/typography/typo06.png' | appImage )}}" alt=""/></div>
+                        <p>Listado de archivos de lista de precio disponibles para descargar a su equipo.</p>
+                        <a href="#/nuevoPedido" class="learn-more">Listas de precio</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

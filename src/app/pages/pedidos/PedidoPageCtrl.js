@@ -24,13 +24,15 @@
           if(data.proveedor){
               $scope.selProv = data.proveedor;
               //var args = '/filtro/artpro.codproveedor,=,'+data.proveedor.codproveedor;
-              var args = '/artpro/'+data.proveedor.codproveedor+'/1,=,1';
-              $log.log(args);
-              ArticulosSrv.getArticulos(args).then(recuperaArticulo, callback);
+              $scope.buscarArt();
+          }else{
+              $scope.cargado=true;
           }
       });
 
       function recuperaArticulo(data) {
+          //$scope.cargado=false;
+          $log.log(data);
           $scope.smartTableData = data;
           $scope.cargado=true;
       }
@@ -55,30 +57,27 @@
           $scope.cargado=true;
       }
 
-      $scope.cargado=false;
       $scope.rubros = [];
       FamiliasSrv.getFamilias().then(function (data) {
           //$log.log(data);
           $scope.rubros = data;
-          $scope.cargado=true;
+          //$scope.cargado=true;
       });
 
-      $scope.cargado=false;
       $scope.marcas = [];
       MarcasSrv.getMarcas().then(function (data) {
           //$log.log(data);
           $scope.marcas = data;
-          $scope.cargado=true;
+          //$scope.cargado=true;
       });
 
-      $scope.cargado=false;
       $scope.proveedores = [];
       var args = "/filtro/borrado,<>,'S',and,rotacion,=,'S'";
       ProveedoresSrv.getProveedores(args).then(function (data) {
           $scope.proveedores = data;
           var sobrante = {"codproveedor":"-100","nombre":"Sobrante Portal","nif":null,"direccion":null,"codprovincia":null,"localidad":null,"codentidad":null,"cuentabancaria":null,"codpostal":null,"telefono":null,"movil":null,"email":null,"web":null,"borrado":"","rotacion":"S","fecha_modificacion":null};
           $scope.proveedores.unshift(sobrante);
-          $scope.cargado=true;
+          //$scope.cargado=true;
       });
 
       $scope.buscarArt = function () {
@@ -95,22 +94,32 @@
           $log.log('FILTRO ARTICULOS');
           $log.log(args);
           ArticulosSrv.getArticulos(args).then(recuperaArticulo, callback);
-      }
+      };
 
       $scope.abrirCambioProv = function (p) {
+        // si hay un proveedor seleccionado pregunto si quiere resetear el pedido
           $scope.provSel = p;
-          $uibModal.open({
-              animation: true,
-              templateUrl: 'app/pages/pedidos/includes/modal/cambioProveedor.html',
-              size: 'md',
-              scope: $scope
-          });
+          if ($scope.pedido.proveedor != ""){
+              $uibModal.open({
+                  animation: true,
+                  templateUrl: 'app/pages/pedidos/includes/modal/cambioProveedor.html',
+                  size: 'md',
+                  scope: $scope
+              });
+          }else{
+              $scope.cambiaProveedor(true);
+
+          }
+
+
+
+
       };
 
       $scope.cambiaProveedor = function (b) {
           if(b){
               // cambio el proveedor, tengo que resetear el pedido
-              toastr.success('', 'Cambio de Proveedor Realizado.', {
+              toastr.success('', 'Proveedor seleccionado.', {
                   "autoDismiss": true,
                   "positionClass": "toast-top-right",
                   "type": "success",
@@ -153,13 +162,10 @@
                   "preventDuplicates": false,
                   "preventOpenDuplicates": false
               });
-
           }
+      };
 
-
-      }
-
-      $scope.abrir = function (item) {
+      $scope.abrirArt = function (item) {
           $scope.artSel = item
           $uibModal.open({
               animation: true,
@@ -169,7 +175,7 @@
           });
       };
       
-      $scope.agregar = function () {
+      $scope.agregarArt = function () {
           $log.log($scope.artSel);
           PedidoSrv.agregarArticulo($scope.artSel).then(function (data) {
               $scope.pedido  = data;
@@ -191,21 +197,84 @@
               })
           });
 
-      }
+      };
 
       // editar pedido
       $scope.modificaCantidad = function () {
           PedidoSrv.setPedidoActual($scope.pedido).then(function (data) {
               $scope.pedido = data;
           });
-      }
+      };
 
       $scope.eliminaArt = function (i) {
           $scope.pedido.articulos[i].remover = true;
           PedidoSrv.setPedidoActual($scope.pedido).then(function (data) {
               $scope.pedido = data;
           });
-      }
+      };
+
+      // guardar pedido
+      $scope.enviarPedido = function () {
+
+      };
+
+      $scope.imprimirPedido = function () {
+          // TODO
+          var docDefinition = {
+              content: [
+                  {text: 'Tables', style: 'header'},
+                  'Official documentation is in progress, this document is just a glimpse of what is possible with pdfmake and its layout engine.',
+                  {text: 'A simple table (no headers, no width specified, no spans, no styling)', style: 'subheader'},
+                  'The following table has nothing more than a body array',
+                  {
+                      style: 'tableExample',
+                      table: {
+                          body: [
+                              ['Column 1', 'Column 2', 'Column 3'],
+                              ['One value goes here', 'Another one here', 'OK?']
+                          ]
+                      }
+                  }
+              ],
+              styles: {
+                  header: {
+                      fontSize: 18,
+                      bold: true,
+                      margin: [0, 0, 0, 10]
+                  },
+                  subheader: {
+                      fontSize: 16,
+                      bold: true,
+                      margin: [0, 10, 0, 5]
+                  },
+                  tableExample: {
+                      margin: [0, 5, 0, 15]
+                  },
+                  tableHeader: {
+                      bold: true,
+                      fontSize: 13,
+                      color: 'black'
+                  }
+              },
+              defaultStyle: {
+                  // alignment: 'justify'
+              }
+          };
+          pdfMake.createPdf(docDefinition).open();
+
+      };
+
+      $scope.guardarPedido = function () {
+          // TODO
+          $scope.cargado=false;
+          $scope.pedido=PedidoSrv.resetPedidoActual();
+          $scope.smartTableData = {};
+          $scope.selProv = {};
+          $scope.cargado=true;
+          return $timeout(function() {window.location.reload(false);}, 3000);
+
+      };
+
 
 
 // MUESTRA LA ANIMACION DE CARGANDO

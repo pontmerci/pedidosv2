@@ -17,7 +17,7 @@
           abstract: true,
           title: 'Pedidos',
           sidebarMeta: {
-            icon: 'ion-grid',
+            icon: 'ion-android-cart',
             order: 100,
           },
         })
@@ -30,6 +30,16 @@
           sidebarMeta: {
             order: 101,
           },
+        })
+        .state('pedidos.listaPedido', {
+            url: '/listaPedido',
+            templateUrl: 'app/pages/pedidos/listaPedidos.html',
+            controller: 'ListaPedidoPageCtrl',
+            controllerAs: 'vm',
+            title: 'Listado de Pedidos',
+            sidebarMeta: {
+                order: 102,
+            },
         })
         ;
     $urlRouterProvider.when('/pedidoactual','/pedidoactual/nuevoPedido');

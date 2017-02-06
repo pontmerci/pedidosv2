@@ -24,6 +24,7 @@
 
 
         function resetPedidoActual() {
+            var pedido = {"proveedor": "", "articulos": [], "subtotal": "0", "totalIVA21": "0","totalIVA10": "0", "totalImpuesto": "0", "total": "0"};
             $window.sessionStorage.setItem("pedidoActual", JSON.stringify(pedido));
             return pedido;
         }
@@ -74,6 +75,7 @@
             var totalIVA10 = 0;
             var totalImpuestos = 0;
             var total;
+            var impuesto=0
 
             angular.forEach(args.articulos, function (val) {
                 subtotal += val.precio_2 * val.cantidad;
@@ -83,8 +85,10 @@
                 } else {
                     totalIVA10 += iva;
                 }
-                if(val.precio_4){
-                    totalImpuestos += ((val.precio_2 * val.cantidad) + iva) * (1 + (val.impuesto / 100));
+                $log.log(val.precio_4);
+                if(val.precio_4>0){
+                    impuesto = ((val.precio_2 * val.cantidad) + iva) * (1 + (val.precio_4 / 100));
+                    totalImpuestos += impuesto;
                 }
 
             });
