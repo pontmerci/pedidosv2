@@ -16,7 +16,7 @@
     $scope.salir = function () {
         $log.log('Chau!');
         window.sessionStorage.clear();
-        $window.location.href = "/auth.html";
+        $window.location.href = "/pedidosv2/auth.html";
     }
 
   }

@@ -39,12 +39,12 @@
 
     var token= window.sessionStorage.getItem("token");
     if (!token){
-        $window.location.href = "/auth.html";
+        $window.location.href = "/pedidosv2/auth.html";
     }else{
         $http.get('http://provinciasunidasltd.com.ar/apiv1/public/api.php/validar/'+token).then(function (data) {
             $log.log(data.data);
             if(!data.data){
-               $window.location.href = "/auth.html";
+               $window.location.href = "/pedidosv2/auth.html";
             }
         })
     }
